@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>João Djonso - Portfólio</title>
+  <link rel="stylesheet" href="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+
+    header, section, footer {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      color: #9fd3ff;
+    }
+
+    .typing {
+      display: inline-block;
+      min-width: 300px;
+      text-align: center;
+      border-right: 2px solid #00ff99;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    section {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    }
+
+    section h2 {
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      color: #00ffcc;
+    }
+
+    section p {
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+    }
+
+    section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    section ul li {
+      margin: 10px 0;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      background: #00ff99;
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #00cc77;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      position: relative;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal.active .modal-content {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: #00ff99;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .close:hover {
+      color: #00cc77;
+    }
+
+    .modal-content h2 {
+      color: #00ffcc;
+      margin-bottom: 15px;
+    }
+
+    .modal-content p {
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .contact-list li {
+      margin: 10px 0;
+      font-size: 1.1rem;
+    }
+
+    .contact-list li i {
+      margin-right: 8px;
+      color: #00ff99;
+    }
+
+    .contact-list li a {
+      color: #00ff99;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .contact-list li a:hover {
+      color: #00cc77;
+    }
+
+    .modal-content .btn {
+      background: #00ff99;
+      color: #000;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .modal-content {
+        max-width: 90%;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      section h2 {
+        font-size: 1.5rem;
+      }
+
+      section p, section ul li {
+        font-size: 1rem;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop class="video-bg">
+    <source src="Small.webm" type="video/mp4">
+    Seu navegador não suporta vídeos.
+  </video>
+
+  <header>
+    <h1>João Djonso</h1>
+    <p class="typing">Desenvolvedor Web | Frontend </p>
+  </header>
+
+  <section id="sobre">
+    <h2>Sobre Mim</h2>
+    <p>
+      Tenho 23 anos e, desde cedo, sempre fui movido pela curiosidade de entender como as coisas funcionam. Cresci observando meu pai consertar eletrodomésticos e, nesse processo, descobri a beleza escondida nos detalhes da tecnologia.
+    </p>
+    <p>
+      Os videogames também tiveram um papel importante na minha vida: além da diversão, me mostraram a grandiosidade do mundo virtual e despertaram em mim a vontade de conhecer o que acontece por trás das telas. Ainda estou no início da minha jornada no universo da programação e da lógica, enfrentando desafios que muitas vezes parecem complexos, mas que encaro como degraus necessários para chegar mais alto.
+    </p>
+    <p>
+      Hoje, trabalho consertando smartphones em casa — uma tarefa que exige paciência, raciocínio e disciplina. Nem sempre é fácil, mas acredito que cada problema resolvido é uma oportunidade de evolução. Aprendi que a tecnologia, assim como a vida, é feita de cálculos, ajustes e persistência. Por isso, mesmo diante das dificuldades, sigo firme: não vou desistir, porque sei que todo obstáculo é apenas mais uma equação esperando para ser solucionada.
+    </p>
+  </section>
+
+  <section id="habilidades">
+    <h2>Habilidades</h2>
+    <ul>
+      <li>💻 Frontend: HTML, CSS, JavaScript</li>
+      <li>⚙️ Backend: Python</li>
+      <li>🌐 Desenvolvedor Web</li>
+    </ul>
+  </section>
+
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>Vamos criar algo incrível juntos!</p>
+    <a href="#" id="openModal" class="btn">Fale comigo</a>
+  </section>
+
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2>Entre em Contato</h2>
+      <p>Conecte-se comigo pelos seguintes canais:</p>
+      <ul class="contact-list">
+        <li><i class="fas fa-envelope"></i> <a href="mailto:joaosploder@gmail.com">joaosploder@gmail.com</a></li>
+        <li><i class="fab fa-instagram"></i> <a href="https://instagram.com/joaooliveira_z32">@joaooliveira_z32</a></li>
+        <li><i class="fab fa-github"></i> <a href="https://github.com/Jdones59">github.com/Jdones59</a></li>
+        <li><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/joao-vitor-oliveira-andré">linkedin.com/in/joao-vitor-oliveira-andré</a></li>
+      </ul>
+      <a id="closeModalBtn" class="btn">Fechar</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 João Djonso</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const openModalBtn = document.getElementById('openModal');
+      const closeModalBtn = document.getElementById('closeModal');
+      const closeModalBtn2 = document.getElementById('closeModalBtn');
+      const modal = document.getElementById('contactModal');
+      const typingElement = document.querySelector('.typing');
+      const text = 'Desenvolvedor Web | Frontend ';
+      let index = 0;
+      let isDeleting = false;
+
+      // Efeito de digitação com apagamento em loop
+      function type() {
+        if (!isDeleting && index < text.length) {
+          typingElement.textContent = text.slice(0, index + 1);
+          index++;
+          setTimeout(type, 100);
+        } else if (isDeleting && index > 0) {
+          typingElement.textContent = text.slice(0, index - 1);
+          index--;
+          setTimeout(type, 50);
+        } else if (index === text.length) {
+          isDeleting = true;
+          setTimeout(type, 1000); // Pausa antes de apagar
+        } else if (index === 0) {
+          isDeleting = false;
+          setTimeout(type, 200); // Pausa antes de digitar novamente
+        }
+      }
+      type();
+
+      // Controle do modal
+      openModalBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.add('active');
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+
+      closeModalBtn2.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
